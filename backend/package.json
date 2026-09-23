@@ -1,0 +1,12 @@
+{
+  "name": "devproject-api",
+  "version": "1.0.0",
+  "description": "Prototyp API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.23.0"
+  }
+}
