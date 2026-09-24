@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Collection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      .book {
+        background-color: white;
+        border-radius: 20px;
+        overflow: hidden;
+        filter: drop-shadow(30px);
+        transition: 0.3s;
+      }
+      .book:hover {
+        transform: translateY(-20px);
+        filter: brightness(90%);
+      }
+      .book img {
+        height: 350px;
+        width: 100%;
+        object-fit: cover;
+      }
+      .name {
+        font-size: x-large;
+        font-weight: bold;
+      }
+      .author {
+        color: rgb(62, 62, 62);
+        font-weight: 500;
+      }
+      .desc {
+        color: gray;
+      }
+      .book-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-300 min-h-screen">
+    <section name="navbar" class="sticky top-0 z-4"></section>
+
+    <h1 class="text-blue-900 py-15 mt-10 text-5xl text-center font-bold">
+      Our Collection
+    </h1>
+
+    <div class="collection max-w-7xl mx-auto px-6 pb-24 grid grid-cols-4 gap-7">
+      <div class="book">
+        <img
+          src="https://skyhorse-us.imgix.net/covers/9781949846386.jpg?auto=format&w=1500"
+          alt="The Great Gatsby"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Classic
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">The Great Gatsby</h2>
+            <p class="author">F. Scott Fitzgerald</p>
+            <p class="desc">
+              A classic novel about wealth, love, and the American Dream.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1925</span>
+            <span>Rating: 4.6</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnJTBHQ1_YnOTLKX8gCMyrzyIfCJUubqJC53Sk75NJMALPI31u9hjekzNn8cUmYQTj2LZFu-XkJ8eprWu0JMATiDCh3UTrQvz0pINdYbg&s=10"
+          alt="Pride and Prejudice"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-red-100 text-red-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Romance
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">Pride and Prejudice</h2>
+            <p class="author">Jane Austen</p>
+            <p class="desc">
+              A classic novel about wealth, love, and the American Dream.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1925</span>
+            <span>Rating: 4.6</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ukGhQfNNae9gzuA52byuzNgZxsnehtLOOGXznlaq_Q&s=10"
+          alt="1984"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Science
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">1984</h2>
+            <p class="author">George Orwell</p>
+            <p class="desc">
+              A man living under a totalitarian government begins to question a
+              society controlled by surveillance and propaganda
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1949</span>
+            <span>Rating: 4.21</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbCDVAQmfcH7DhRI34ZFu7NSl0Llcx2dus89rAJ0B4gw&s=10"
+          alt="The Hunger Games"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Dystopian
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">The Hunger Games</h2>
+            <p class="author">Suzanne Collins</p>
+            <p class="desc">
+              Katniss Everdeen is forced to compete in a deadly televised
+              competition controlled by a powerful government.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 2008</span>
+            <span>Rating: 4.33</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMQ72Or4AUNxIiEcNLZZn9C9be8odSLZ_yVQSDTsCIqw&s=10"
+          alt="The Hobbit"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-purple-100 text-purple-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Fantasy
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">The Hobbit</h2>
+            <p class="author">J.R.R. Tolkien</p>
+            <p class="desc">
+              Bilbo Baggins leaves his quiet life and joins a dangerous
+              adventure involving dwarves, dragons, and treasure.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1937</span>
+            <span>Rating: 4.26</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSISsO0qh6XOl_YxCfgcAKslkwr98yYwGsvGnwtNv4yeQ&s=10"
+          alt="The Book Thief"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Classic
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">The Book Thief</h2>
+            <p class="author">Markus Zusak</p>
+            <p class="desc">
+              A young girl in Nazi Germany discovers the power of books while
+              facing the realities of war and loss.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 2005</span>
+            <span>Rating: 4.42</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTTiuDU4-KUZd4iurgfiJK3eryOHf26C-G0xbS2g6HtQ&s=10"
+          alt="Animal Farm"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Dystopian
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">Animal Farm</h2>
+            <p class="author">George Orwell</p>
+            <p class="desc">
+              Farm animals rebel against their human owner, but their new
+              society slowly becomes another form of oppression.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1945</span>
+            <span>Rating: 3.95</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BNTIwMTIwYjAtMjk4YS00OTNhLTk5ZjItMjMwMTNiMWI1MDViXkEyXkFqcGc@._V1_.jpg"
+          alt="Little Women"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Classic
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">Little Women</h2>
+            <p class="author">Louisa May Alcott</p>
+            <p class="desc">
+              Four sisters grow up together while dealing with love, family,
+              ambition, and the challenges of life.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1968</span>
+            <span>Rating: 4.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Qkd6UH2jm9v2U1GOXAvgLi-OiHxAcy2S6cvGcrMMow&s=10"
+          alt="Fahrenheit 451"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Dystopian
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">Fahrenheit 451</h2>
+            <p class="author">Ray Bradbury</p>
+            <p class="desc">
+              A classic novel about wealth, love, and the American Dream.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1953</span>
+            <span>Rating: 3.97</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRoVXIcfM64FwR5vBE1UsNCLlNzhyFEWn1JkQOFeyTp6YQEZt6oeMoljRY&s=10"
+          alt="The Picture of Dorian Gray"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-gray-200 text-gray-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Gothic
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">The Picture of Dorian Gray</h2>
+            <p class="author">Oscar Wilde</p>
+            <p class="desc">
+              A beautiful young man remains physically young while a mysterious
+              portrait reflects the corruption of his soul.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1890</span>
+            <span>Rating: 4.10</span>
+          </div>
+        </div>
+      </div>
+      <div class="book">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsDqE20IdhCtNpqD_Go46mhKfyKAoIBrKe5xF0HEChNA&s=10"
+          alt="Dune"
+        />
+
+        <div class="p-5">
+          <span
+            class="bg-yellow-100 text-yellow-800 text-sm font-semibold px-3 py-2 rounded-full mb-3"
+          >
+            Science fiction
+          </span>
+
+          <div class="book-info">
+            <h2 class="name">Dune</h2>
+            <p class="author">Frank Herbert</p>
+            <p class="desc">
+              A young heir becomes involved in a struggle for control of a
+              valuable desert planet and its mysterious resources.
+            </p>
+          </div>
+          <div
+            class="flex justify-between mt-5 items-center text-base text-gray-500"
+          >
+            <span>Year : 1465</span>
+            <span>Rating: 4.27</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section name="footer"></section>
+
+    <script src="/navbar/navbar.js"></script>
+    <script src="/collection/index.js"></script>
+  </body>
+</html>
+```
