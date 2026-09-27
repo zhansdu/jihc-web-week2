@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(17, 21, 123);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            background-color: rgb(18, 8, 68);
+            border-bottom: 2px solid rgb(152, 169, 220);
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 2px solid rgb(129, 154, 225);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            margin: 0 4px;
+            font-weight: bold;
+        }
+
+        .edit-btn { background-color: #f1c40f; color: black; }
+        .delete-btn { background-color: #e74c3c; color: white; }
+
+        footer {
+            position: sticky;
+            bottom: 0;
+            background-color: rgb(18, 8, 68);
+            padding: 30px 50px;
+            font-size: 24px;
+            border-top: 2px solid rgb(129, 154, 225);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">JAKE</div>
+        <nav>
+            <a href="main.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="users.html">Users</a>
+            <a href="empty.html">Empty</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Registered People</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="usertable"></tbody>
+        </table>
+    </main>
+
+    <footer>
+        <div>Mynda footer</div>
+    </footer>
+
+<script>
+    async function getusers() {
+        let res = await fetch('http://localhost:3000/users');
+        let users = await res.json();
+        let table = document.getElementById('usertable');
+        table.innerHTML = '';
+        users.forEach(item => {
+            table.innerHTML += `
+                <tr id="user-row-${item.id}">
+                    <td class="cell-fname">${item.fname}</td>
+                    <td class="cell-lname">${item.lname}</td>
+                    <td class="cell-email">${item.email}</td>
+                    <td class="cell-number">${item.number}</td>
+                    <td class="action-cell">
+                        <button class="action-btn edit-btn" onclick="makeeditable(${item.id})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteuser(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function makeeditable(id) {
+        let row = document.getElementById(`user-row-${id}`);
+        let fnamecell = row.querySelector('.cell-fname');
+        let lnamecell = row.querySelector('.cell-lname');
+        let emailcell = row.querySelector('.cell-email');
+        let numbercell = row.querySelector('.cell-number');
+        let actioncell = row.querySelector('.action-cell');
+
+        let currentfname = fnamecell.innerText;
+        let currentlname = lnamecell.innerText;
+        let currentemail = emailcell.innerText;
+        let currentnumber = numbercell.innerText;
+
+        fnamecell.innerHTML = `<input type="text" id="editfname${id}" value="${currentfname}" style="width: 90%; padding: 5px; color: black;">`;
+        lnamecell.innerHTML = `<input type="text" id="editlname${id}" value="${currentlname}" style="width: 90%; padding: 5px; color: black;">`;
+        emailcell.innerHTML = `<input type="text" id="editemail${id}" value="${currentemail}" style="width: 90%; padding: 5px; color: black;">`;
+        numbercell.innerHTML = `<input type="text" id="editnumber${id}" value="${currentnumber}" style="width: 90%; padding: 5px; color: black;">`;
+
+        actioncell.innerHTML = `
+            <button class="action-btn" style="background-color: #2ecc71; color: white;" onclick="saveuser(${id})">Save</button>
+            <button class="action-btn delete-btn" onclick="getusers()">Cancel</button>
+        `;
+    }
+
+    async function saveuser(id) {
+        let newfname = document.getElementById(`editfname${id}`).value;
+        let newlname = document.getElementById(`editlname${id}`).value;
+        let newemail = document.getElementById(`editemail${id}`).value;
+        let newnumber = document.getElementById(`editnumber${id}`).value;
+
+        let res = await fetch(`http://localhost:3000/users/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                fname: newfname, 
+                lname: newlname, 
+                email: newemail, 
+                number: newnumber 
+            })
+        });
+
+        if (res.ok) {
+            getusers();
+        } else {
+            alert("Update failed!");
+        }
+    }
+
+    async function deleteuser(id) {
+        let res = await fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (res.ok) {
+            getusers();
+        } else {
+            alert("Delete failed!");
+        }
+    }
+
+    getusers();
+</script>
