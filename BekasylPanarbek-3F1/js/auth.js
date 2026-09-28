@@ -66,6 +66,8 @@ async function renderUsersTable() {
   const users = await response.json();
 
   const tbody = document.getElementById("usersTableBody");
+  if (!tbody) return;
+
   tbody.innerHTML = "";
 
   for (let i = 0; i < users.length; i++) {
@@ -77,9 +79,47 @@ async function renderUsersTable() {
       <td>${user.name}</td>
       <td>${user.email}</td>
       <td>${user.password}</td>
+      <td>
+        <button class="btn btn-sm btn-warning me-1" onclick="updateUsername(${user.id}, '${user.name}')">Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">Delete</button>
+      </td>
     `;
 
     tbody.appendChild(row);
+  }
+}
+
+async function updateUsername(id, currentName) {
+  const newName = prompt("Enter new username:", currentName);
+  
+  if (!newName || newName === currentName) return;
+
+  const response = await fetch(`${API_URL}/users`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id, name: newName }),
+  });
+
+  if (response.ok) {
+    renderUsersTable();
+  } else {
+    alert("Failed to update username");
+  }
+}
+
+async function deleteUser(id) {
+  if (!confirm("Are you sure you want to delete this user?")) return;
+
+  const response = await fetch(`${API_URL}/users`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id }),
+  });
+
+  if (response.ok) {
+    renderUsersTable();
+  } else {
+    alert("Failed to delete user");
   }
 }
 

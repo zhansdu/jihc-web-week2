@@ -14,7 +14,10 @@ const pool = new Pool({
 
 const server = http.createServer(async function (req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS",
+  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
@@ -26,7 +29,7 @@ const server = http.createServer(async function (req, res) {
   try {
     if (req.method === "GET" && req.url === "/users") {
       const result = await pool.query(
-        "SELECT id, name, email, password FROM users ORDER BY id"
+        "SELECT id, name, email, password FROM users ORDER BY id",
       );
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(result.rows));
@@ -35,7 +38,7 @@ const server = http.createServer(async function (req, res) {
 
       await pool.query(
         "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
-        [newUser.name, newUser.email, newUser.password]
+        [newUser.name, newUser.email, newUser.password],
       );
 
       res.writeHead(200, { "Content-Type": "application/json" });
@@ -45,7 +48,7 @@ const server = http.createServer(async function (req, res) {
 
       const result = await pool.query(
         "SELECT * FROM users WHERE email = $1 AND password = $2",
-        [loginUser.email, loginUser.password]
+        [loginUser.email, loginUser.password],
       );
 
       const foundUser = result.rows[0];
@@ -57,6 +60,23 @@ const server = http.createServer(async function (req, res) {
         res.writeHead(401, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "Invalid email or password" }));
       }
+    } else if (req.method === "PUT" && req.url === "/users") {
+      const data = await parse.json(req);
+
+      await pool.query("UPDATE users SET name = $1 WHERE id = $2", [
+        data.name,
+        data.id,
+      ]);
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "Username updated successfully" }));
+    } else if (req.method === "DELETE" && req.url === "/users") {
+      const data = await parse.json(req);
+
+      await pool.query("DELETE FROM users WHERE id = $1", [data.id]);
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "User deleted successfully" }));
     } else {
       res.writeHead(404, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ message: "Not found" }));
