@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imgs/knight.png">
+    <title>Chess</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                linear-gradient(45deg, #ffffff 25%, transparent 25%),
+                linear-gradient(-45deg, #ffffff 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ffffff 75%),
+                linear-gradient(-45deg, transparent 75%, #ffffff 75%)
+            ;
+            background-size: 142.5px 142px;
+            background-position: 0 0, 0 71px, 71px -71px, -71px 0px;
+            background-color: rgb(235, 226, 235, 0.5);
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .navbar-aside {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .sign-btn {
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: radial-gradient(#d0a4d0, #f0c0f0);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .sign-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-aside button:not(.sign-btn) {
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            padding: 8px 4px;
+            position: relative;
+        }
+
+        .navbar-aside button:not(.sign-btn) {
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes underline-slide {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+
+        .navbar-aside button:not(.sign-btn)::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: black;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .navbar-aside button:not(.sign-btn):hover::before {
+            animation: underline-slide 0.3s ease forwards;
+        }
+
+        .navbar-aside button:not(.sign-btn).active::before {
+            transform: scaleX(1);
+        }
+
+        .home-img {
+            width: 40px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .home-img:hover {
+            transform: scale(1.05) skewX(3deg);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .img-avatar {
+            width: 25px;
+            border: 2px solid black;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        main {
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            padding: 100px 0px 0px 0px;
+            flex: 1;
+        }
+
+        table {
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            width: 90%;
+        }
+
+        th {
+            padding: 14px 20px;
+        }
+
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+        td button {
+            cursor: pointer;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #d0a4d0;
+        }
+
+        .delete-btn {
+            background-color: #e08080;
+            color: white;
+        }
+
+        .footer {
+            background-color: rgb(235, 226, 235, 0.5);
+            border-top: 1px solid rgb(0, 0, 0, 0.1);
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            width: 30px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            font-size: 16px;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-copy {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="navbar">
+        <a href="index.html"><img src="imgs/knight.png" class="home-img"></a>
+        <aside class="navbar-aside">
+            <a href="index.html"><button class="home-btn">Home</button></a>
+            <a href="table.html"><button class="users-btn active">Users</button></a>
+            <a href="about.html"><button class="about-btn">About</button></a>
+            <a href="signup.html"><button class="sign-btn">Sign up</button></a>
+            <img src="imgs/icons8-pawn-50.png" class="img-avatar hidden" id="img-avatar">
+        </aside>
+    </section>
+    <main>
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Изменить</th>
+                    <th>Удалить</th>
+                </tr>
+            </thead>
+            <tbody id="users-body">
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="imgs/knight.png" class="footer-logo">
+            <nav class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="table.html">Users</a>
+                <a href="about.html">About</a>
+            </nav>
+            <p class="footer-copy">&copy; 2026 Chess. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        async function loadUsers() {
+            const response = await fetch('http://localhost:8080/users');
+            const users = await response.json();
+            const tbody = document.getElementById('users-body');
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.username}</td>
+                    <td><button class="edit-btn" onclick="editUser(${user.id})">Изменить</button></td>
+                    <td><button class="delete-btn" onclick="deleteUser(${user.id})">Удалить</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            if (users.length > 0) {
+                document.querySelectorAll('th').forEach(th => th.style.borderBottom = '1px solid grey')
+            }
+        }
+
+        async function editUser(id) {
+            const newUsername = prompt('Введите новое имя пользователя:');
+            if (!newUsername) return;
+
+            const response = await fetch('http://localhost:8080/users', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, username: newUsername })
+            });
+
+            if (response.ok) {
+                alert('Имя изменено');
+                loadUsers();
+            } else {
+                alert('Ошибка при изменении');
+            }
+        }
+
+        async function deleteUser(id) {
+            if (!confirm('Точно удалить пользователя?')) return;
+
+            const response = await fetch('http://localhost:8080/users', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+
+            if (response.ok) {
+                alert('Пользователь удалён');
+                loadUsers();
+            } else {
+                alert('Ошибка при удалении');
+            }
+        }
+
+        loadUsers();
+    </script>
+</body>
+</html>
