@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "123"
+  },
+  {
+    "username": "Mina",
+    "email": "mina@gmail.com",
+    "password": "1111"
+  },
+  {
+    "username": "Hiii",
+    "email": "mina11@gmail.com",
+    "password": "mina11"
+  },
+  {
+    "username": "Amina",
+    "email": "mina12@gmail.com",
+    "password": "unforgettable12"
+  },
+  {
+    "username": "nur",
+    "email": "nurr@gmail.com",
+    "password": "nurrr22"
+  },
+  {
+    "username": "Altynau",
+    "email": "altyn11@gmail.com",
+    "password": "altyn11"
+  },
+  {
+    "username": "hello",
+    "email": "hello@gmail.com",
+    "password": "hello11"
+  },
+  {
+    "username": "qqqq",
+    "email": "qwerty00@gmail.com",
+    "password": "qwerty00"
+  },
+  {
+    "username": "hjsdfs",
+    "email": "adam@gmail.com",
+    "password": "adam11"
+  },
+  {
+    "username": "Zhan agay",
+    "email": "zhansdu@gmail.com",
+    "password": "zhansdu"
+  }
+]
